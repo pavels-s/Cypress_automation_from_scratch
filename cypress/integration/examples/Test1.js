@@ -18,12 +18,9 @@ describe('My first Test Suite', function() {
         //The same with css selector (as per lecture it is bad option)
         //cy.get(':nth-child(3) > .product-action > button').click()
 
+        console.log('testtest')
+
     
-
-    })
-
-    it('My second test case', function() {
-        
         cy.get('.products').as('productLocator')
         cy.get('@productLocator').find('.product').each(($el, index, $list) => {
             
@@ -33,5 +30,15 @@ describe('My first Test Suite', function() {
                 cy.wrap($el).find('button').click()
             }
         })
+
+        cy.get('.brand').then(function(logoElement) {
+            const logo = cy.log(logoElement.text())
+        })
+        //Instead of cy.log(logo.text())
+
     })
+
+
+
+
 })

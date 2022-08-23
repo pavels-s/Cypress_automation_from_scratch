@@ -20,6 +20,9 @@ describe('My second Test Suite', function() {
             expect(str).to.equal('Hello , Are you sure you want to confirm?')
         })
 
+        //open page and remove target
+        cy.get('#opentab').invoke('removeAttr','target').click()
+
     })
 
 })

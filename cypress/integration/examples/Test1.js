@@ -11,17 +11,17 @@ describe('My first Test Suite', function() {
         //FOund only visible .product elements on the page. (there are 5 .products elements on the page with the hidden one)
         cy.get('.product:visible').should('have.length', 4)
 
+        cy.get('.products').as('productLocator')
         //Parent child chaining. Getting the form with products and searching .product elements in it (the same search with another strategy)
-        cy.get('.products').find('.product').should('have.length', 4)
+        cy.get('@productLocator').find('.product').should('have.length', 4)
 
-        cy.get('.products').find('.product').eq(2).contains('ADD TO CART').click()
+        cy.get('@productLocator').find('.product').eq(2).contains('ADD TO CART').click()
         //The same with css selector (as per lecture it is bad option)
         //cy.get(':nth-child(3) > .product-action > button').click()
 
-        console.log('testtest')
+        console.log('text printed in devtool console')
 
     
-        cy.get('.products').as('productLocator')
         cy.get('@productLocator').find('.product').each(($el, index, $list) => {
             
             const textVeg = $el.find('h4.product-name').text()
@@ -31,10 +31,17 @@ describe('My first Test Suite', function() {
             }
         })
 
+        //Assert if logo is correctly displayed
+        cy.get('.brand').should('have.text', 'GREENKART')
+
+
+
+        //Printing in logs
         cy.get('.brand').then(function(logoElement) {
             const logo = cy.log(logoElement.text())
         })
         //Instead of cy.log(logo.text())
+        //Not possible to cy.get('.brand').text()
 
     })
 

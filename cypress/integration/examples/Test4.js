@@ -23,6 +23,12 @@ describe('My second Test Suite', function() {
         //open page and remove target
         cy.get('#opentab').invoke('removeAttr','target').click()
 
+        //Grabbing the url you are currently 
+        cy.url().should('include','rahulshettyacademy')
+
+        //Moving to the previous page
+        cy.go('back')
+
     })
 
 })

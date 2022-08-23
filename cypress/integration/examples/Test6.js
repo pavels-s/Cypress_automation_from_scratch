@@ -12,5 +12,13 @@ describe('My new Test Suite', function() {
         cy.contains('Top').click({force: true})
         cy.url().should('include','top')
 
+
+        cy.get('#opentab').then(function(el) {
+
+            const url = el.prop('href')
+            cy.log(url)
+            cy.visit(url)
+        })
+
     })
 })

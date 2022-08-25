@@ -1,4 +1,6 @@
 /// <reference types="Cypress" />
+import HomePage from '../pageObjects/HomePage'
+import ProductsPage from '../pageObjects/ProductsPage'
 
 
 describe('My new Test Suite', function() {
@@ -13,21 +15,25 @@ describe('My new Test Suite', function() {
 
     it('My new Test Case', function() { 
 
+        const homePage = new HomePage()
+        const productsPage = new ProductsPage()
+
         cy.visit("https://rahulshettyacademy.com/angularpractice/")
 
-        cy.get('input[name="name"]:nth-child(2)').type(this.data.name)
-        cy.get('select').select(this.data.gender)
+        homePage.getEditBox().type(this.data.name)
+        homePage.getGender().select(this.data.gender)
 
         //Checking second textbox if name dublicated
-        cy.get('input[name="name"]:nth-child(1)').should('have.value', this.data.name)
+        homePage.getTwoWayDataBinding().should('have.value', this.data.name)
 
         //Checking min lenght 2 characters. ('have.minlength' doesnt work because it is not jquery) - another way how to do it find in Test7.js
-        cy.get('input[name="name"]:nth-child(2)').should('have.attr','minlength','2')
+        homePage.getEditBox().should('have.attr','minlength','2')
         
         //Checking if radio is disabled
-        cy.get('#inlineRadio3').should('be.disabled')
+        homePage.getEnterpreneurRadio().should('be.disabled')
 
-        cy.get('a[href="/angularpractice/shop"]').click()
+        //Click on the shop button
+        homePage.getShopTab().click()
 
 
         //Taking products from the commands.js and iterating through all of them
@@ -36,8 +42,8 @@ describe('My new Test Suite', function() {
         })
         
 
-        //Checking if selected products added to the cart
-        cy.get('#navbarResponsive > .navbar-nav > .nav-item > .nav-link').click()
+        //Going to the cart
+        productsPage.checkOutButton().click()
 
     })
 

@@ -31,6 +31,7 @@ describe('My new Test Suite', function() {
 
         //Searching Blackberry and adding it to cart through the commands.js
         cy.selectProduct('Blackberry')
+        cy.selectProduct('Nokia')
 
 
 

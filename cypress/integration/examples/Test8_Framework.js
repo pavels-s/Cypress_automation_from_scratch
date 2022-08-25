@@ -29,11 +29,15 @@ describe('My new Test Suite', function() {
 
         cy.get('a[href="/angularpractice/shop"]').click()
 
-        //Searching Blackberry and adding it to cart through the commands.js
-        cy.selectProduct('Blackberry')
-        cy.selectProduct('Nokia')
 
+        //Taking products from the commands.js and iterating through all of them
+        this.data.productName.forEach(function(element) {
+            cy.selectProduct(element)
+        })
+        
 
+        //Checking if selected products added to the cart
+        cy.get('#navbarResponsive > .navbar-nav > .nav-item > .nav-link').click()
 
     })
 

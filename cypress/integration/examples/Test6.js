@@ -4,7 +4,7 @@ describe('My new Test Suite', function() {
 
     it('My new Test Case', function() {
 
-        cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+        cy.visit(Cypress.env('url')+"AutomationPractice/")
 
         //Using invoke cuz show is a jquery method. 
         cy.get('div.mouse-hover-content').invoke('show')

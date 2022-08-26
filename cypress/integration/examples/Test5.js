@@ -4,7 +4,7 @@ describe('My new Test Suite', function() {
 
     it('My new Test Case', function() {
 
-        cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+        cy.visit(Cypress.env('url')+"AutomationPractice/")
 
         //nth-child(2) - to find 2nd child element
         cy.get('tr td:nth-child(2)').each(($el, index, $list) => {

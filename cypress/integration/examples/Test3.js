@@ -4,7 +4,7 @@ describe('My second Test Suite', function() {
 
     it('My updated Test Case', function() {
         
-        cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+        cy.visit(Cypress.env('url')+"AutomationPractice/")
 
         //Checkbox hadling
         cy.get('#checkBoxOption1').check().should('be.checked').and('have.value', 'option1')

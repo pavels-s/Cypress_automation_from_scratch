@@ -44,11 +44,36 @@ describe('My new Test Suite', function() {
 
         //Going to the cart
         productsPage.checkOutButton().click()
+        var sum = 0
+
+        //Checking total price 
+        cy.get('tr td:nth-child(4) strong').each(($el, index, $list) => {
+            //cy.log($el.text())
+
+            const actualText = $el.text()
+            //Splitting into two parts with space - res[0]=$. ; res[1]=5000
+            //Using var instead of const to reuse this variable
+            var res = actualText.split(" ")
+            //Remove any spaces by trim
+            res = res[1].trim()
+            
+            //Summing price
+            sum = Number(sum) + Number(res)
+        }).then(function() {
+            cy.log(sum)
+        })
+
+        cy.get('h3 strong').then(function(element) {
+            const amount = element.text()
+            var res = amount.split(" ")
+            var total = res[1].trim()
+            expect(Number(total)).to.equal(Number(sum))
+        })
 
         //Checkout to delivery choosing
         cy.contains('Checkout').click()
 
-        //Country selecting
+        //Country selecting + adding some time in config to wait suggestions
         cy.get('#country').type('Latvia')
         cy.get('.suggestions > ul > li > a').click()
         cy.get('#checkbox2').click({force: true})
@@ -59,6 +84,7 @@ describe('My new Test Suite', function() {
             //if (actualText.includes("Success!")) {
             expect(actualText.includes("Success!")).to.be.true
         })
+
 
     })
 

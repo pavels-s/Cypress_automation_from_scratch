@@ -7,7 +7,7 @@ module.exports = defineConfig({
       // implement node event listeners here
       on('file:preprocessor', cucumber())
     },
-    specPattern: 'cypress/integration/examples/BDD/*.feature',
+    specPattern: 'cypress/integration/examples/',
     defaultCommandTimeout: 6000,
     pageLoadTimeout: 10000,
     "env": {

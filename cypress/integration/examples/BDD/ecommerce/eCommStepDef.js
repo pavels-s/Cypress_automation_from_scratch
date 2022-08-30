@@ -1,8 +1,12 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps"
 import HomePage from "../../../pageObjects/HomePage"
 import ProductsPage from "../../../pageObjects/ProductsPage"
+
 const homePage = new HomePage()
 const productsPage = new ProductsPage
+let name
+
+//npx cypress-tags run -e TAGS="Smoke"
 
 Given('I open Ecommerce page', ()=> {
     cy.visit(Cypress.env('url')+"angularpractice/")
@@ -63,4 +67,27 @@ Then('Select country, submit and verify Thankyou', ()=> {
             //if (actualText.includes("Success!")) {
             expect(actualText.includes("Success!")).to.be.true
         })
+})
+
+When('I fill the form details', function(dataTable) {
+    //|Jane | female |  
+    homePage.getEditBox().type(dataTable.rawTable[1][0])
+    homePage.getGender().select(dataTable.rawTable[1][1])
+    name = dataTable.rawTable[1][0]
+})
+
+Then('Validate the form behaviour', function(dataTable) {
+    //Checking second textbox if name dublicated
+    homePage.getTwoWayDataBinding().should('have.value', name)
+
+    //Checking min lenght 2 characters. ('have.minlength' doesnt work because it is not jquery) - another way how to do it find in Test7.js
+    homePage.getEditBox().should('have.attr','minlength','2')
+        
+    //Checking if radio is disabled
+    homePage.getEnterpreneurRadio().should('be.disabled')
+})
+
+And('Select Shop page', ()=> {
+    //Click on the shop button
+    homePage.getShopTab().click()
 })

@@ -7,6 +7,8 @@ const productsPage = new ProductsPage
 let name
 
 //npx cypress-tags run -e TAGS="Smoke"
+//npx cypress-tags run --spec cypress\integration\examples\BDD\*.feature --headed --browser chrome
+//node cucumber-html-report.js
 
 Given('I open Ecommerce page', ()=> {
     cy.visit(Cypress.env('url')+"angularpractice/")

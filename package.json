@@ -10,17 +10,15 @@
     "recordDashboardTest": "npm run test -- --record --key fa423514-5a84-42a7-b6a0-b5e7191bba12 --reporter mochawesome",
     "GreenKartTest": "npm run test -- --spec \"cypress/integration/GreenKart/*\""
   },
-
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
   },
-
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^10.6.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
-    "cypress-iframe": "^1.0.1"
+    "cypress-iframe": "^1.0.1",
+    "multiple-cucumber-html-reporter": "^2.0.0"
   }
-  
 }
